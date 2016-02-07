@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <import resource="discount.xml"/>
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:bigAuditorium.properties</value>
+                <value>classpath:midAuditorium.properties</value>
+                <value>classpath:smallAuditorium.properties</value>
+            </list>
+        </property>
+        <property name="ignoreResourceNotFound" value="true" />
+        <property name="systemPropertiesMode">
+            <util:constant
+                    static-field="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+        </property>
+    </bean>
+
+    <bean id="bigauditorium" class="ua.epam.theatre.entity.Auditorium">
+        <constructor-arg value="${name_b}"/>
+        <constructor-arg value="${seats_b}"/>
+        <constructor-arg value="${vip_b}"/>
+    </bean>
+
+    <bean id="miduaditorium" class="ua.epam.theatre.entity.Auditorium">
+        <constructor-arg value="${name_m}"/>
+        <constructor-arg value="${seats_m}"/>
+        <constructor-arg value="${vip_m}"/>
+    </bean>
+
+    <bean id="smallauditorium" class="ua.epam.theatre.entity.Auditorium">
+        <constructor-arg value="${name_s}"/>
+        <constructor-arg value="${seats_s}"/>
+        <constructor-arg value="${vip_s}"/>
+    </bean>
+
+    <bean id="auditoriumservice" class="ua.epam.theatre.services.AuditoriumServiceImpl">
+        <property name="auditoriums">
+            <list>
+                <ref bean="bigauditorium"/>
+                <ref bean="miduaditorium"/>
+                <ref bean="smallauditorium"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="userdao" class="ua.epam.theatre.dao.UserDaoImpl"/>
+    <bean id="eventdao" class="ua.epam.theatre.dao.EventDaoImpl"/>
+    <bean id="bookingdao" class="ua.epam.theatre.dao.BookingDaoImpl"/>
+    <bean id="ticketdao" class="ua.epam.theatre.dao.TicketsDaoImpl"/>
+
+    <bean id="bookingservice" class="ua.epam.theatre.services.BookingServiceImpl">
+        <property name="bookingDao" ref="bookingdao"/>
+        <property name="priceRating" value="7.0"/>
+        <property name="discountService" ref="discountservice"/>
+    </bean>
+    <bean id="eventservice" class="ua.epam.theatre.services.EventServiceImpl">
+        <property name="eventDao" ref="eventdao"/>
+    </bean>
+    <bean id="userservice" class="ua.epam.theatre.services.UserServiceImpl">
+        <property name="userDao" ref="userdao"/>
+    </bean>
+
+    <bean id="ticketservice" class="ua.epam.theatre.services.TicketServiceImpl">
+        <property name="ticketsDao" ref="ticketdao"/>
+    </bean>
+
+    <bean id="user" class="ua.epam.theatre.entity.User" scope="prototype"/>
+    <bean id="event" class="ua.epam.theatre.entity.Event" scope="prototype"/>
+    <bean id="ticket" class="ua.epam.theatre.entity.Ticket" scope="prototype"/>
+    <bean id="order" class="ua.epam.theatre.entity.Order" scope="prototype"/>
+    <bean id="theatredb" class="ua.epam.theatre.dao.TheatreDB"/>
+
+</beans>

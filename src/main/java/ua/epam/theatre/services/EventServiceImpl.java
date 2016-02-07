@@ -1,0 +1,43 @@
+package ua.epam.theatre.services;
+
+import ua.epam.theatre.entity.Auditorium;
+import ua.epam.theatre.entity.Event;
+import ua.epam.theatre.dao.EventDao;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+/**
+ * Created by Daria on 07.02.2016.
+ */
+public class EventServiceImpl implements EventService {
+    private EventDao eventDao;
+
+    public void setEventDao(EventDao eventDao) {
+        this.eventDao = eventDao;
+    }
+
+    public void create(Event event) {
+        eventDao.create(event);
+        System.out.println("New event: "+event);
+    }
+
+    public void remove(Event event) {
+        eventDao.remove(event);
+        System.out.println("Remove "+ event);
+    }
+
+    public ArrayList<Event> getByName(String name) {
+        return eventDao.getByName(name);
+    }
+
+    public Collection<Event> getAll() {
+        return eventDao.getAll();
+
+    }
+
+    public void assignAuditorium(Event event, Auditorium auditorium) {
+        eventDao.assignAuditorium(event,auditorium);
+        System.out.println("Set auditorium "+auditorium.getName()+" for event "+event.getName());
+    }
+}
