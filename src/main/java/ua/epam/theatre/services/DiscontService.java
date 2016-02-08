@@ -11,6 +11,5 @@ import java.util.List;
  */
 public interface DiscontService {
     List<DiscountStrategy> getDiscounts();
-    void setDiscounts(List<DiscountStrategy> discounts);
     double getDiscount(User user, Event event, LocalDate date);
 }
