@@ -4,6 +4,7 @@ import ua.epam.theatre.entity.Event;
 import ua.epam.theatre.entity.Order;
 import ua.epam.theatre.entity.User;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -23,7 +24,7 @@ public class Free10ThDiscount implements DiscountStrategy {
         this.discPerCent = discPerCent;
     }
 
-    public double getDiscount(User user, Event event) {
+    public double getDiscount(User user, Event event, LocalDate date) {
         ArrayList<Order> ord = userService.getBookedTickets(user);
         int count = 0;
         for(Order o : ord) {

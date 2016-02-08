@@ -1,10 +1,10 @@
 package ua.epam.theatre.dao;
 
-import ua.epam.theatre.entity.Auditorium;
 import ua.epam.theatre.entity.Event;
+import ua.epam.theatre.entity.Schedule;
+
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Set;
 
 /**
  * Created by Daria on 07.02.2016.
@@ -12,11 +12,19 @@ import java.util.Set;
 public class EventDaoImpl implements EventDao {
     public void create(Event event) {
         event.setId(TheatreDB.eventMap.size()+1);
+        for (Schedule s : event.getSchedule()) {
+            s.setId(TheatreDB.scheduleMap.size()+1);
+            TheatreDB.scheduleMap.put(TheatreDB.scheduleMap.size()+1, s);
+        }
+
         TheatreDB.eventMap.put(TheatreDB.eventMap.size()+1, event);
     }
 
     public void remove(Event event) {
         TheatreDB.eventMap.remove(event.getId());
+        for (Schedule s : event.getSchedule()) {
+            TheatreDB.scheduleMap.remove(s.getId());
+        }
     }
 
     public ArrayList<Event> getByName(String name) {
@@ -33,7 +41,4 @@ public class EventDaoImpl implements EventDao {
         return  TheatreDB.eventMap.values();
     }
 
-    public void assignAuditorium(Event event, Auditorium auditorium) {
-        event.setAuditorium(auditorium);
-    }
 }

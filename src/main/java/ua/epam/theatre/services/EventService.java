@@ -3,6 +3,7 @@ package ua.epam.theatre.services;
 import ua.epam.theatre.entity.Auditorium;
 import ua.epam.theatre.entity.Event;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -14,5 +15,5 @@ public interface EventService {
     void remove(Event event);
     ArrayList<Event> getByName(String name);
     Collection<Event> getAll();
-    void assignAuditorium(Event event, Auditorium auditorium);
+    void assignAuditorium(Event event, Auditorium auditorium, LocalDateTime date);
 }

@@ -1,9 +1,11 @@
 package ua.epam.theatre.services;
 
+import ua.epam.theatre.dao.EventDao;
 import ua.epam.theatre.entity.Auditorium;
 import ua.epam.theatre.entity.Event;
-import ua.epam.theatre.dao.EventDao;
+import ua.epam.theatre.entity.Schedule;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -36,8 +38,11 @@ public class EventServiceImpl implements EventService {
 
     }
 
-    public void assignAuditorium(Event event, Auditorium auditorium) {
-        eventDao.assignAuditorium(event,auditorium);
+    public void assignAuditorium(Event event, Auditorium auditorium, LocalDateTime date) {
+        ArrayList<Schedule> schedules = event.getSchedule();
+        for(Schedule s : schedules) {
+            s.setAuditorium(auditorium);
+        }
         System.out.println("Set auditorium "+auditorium.getName()+" for event "+event.getName());
     }
 }

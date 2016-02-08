@@ -9,6 +9,7 @@ public class Ticket {
     private double price;
     private Event event;
     private Order order;
+    private Schedule schedule;
 
     public Ticket() {}
 
@@ -50,6 +51,14 @@ public class Ticket {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
     }
 
     @Override

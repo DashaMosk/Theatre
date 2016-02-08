@@ -1,8 +1,8 @@
 package ua.epam.theatre.services;
 
+import ua.epam.theatre.dao.UserDao;
 import ua.epam.theatre.entity.Order;
 import ua.epam.theatre.entity.User;
-import ua.epam.theatre.dao.UserDao;
 
 import java.util.ArrayList;
 

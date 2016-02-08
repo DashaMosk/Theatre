@@ -13,7 +13,7 @@
         <ref bean="birthdaydiscont"/>
         <ref bean="free10thdiscont"/>
     </util:list>
-    <bean id="discountservice" class="ua.epam.theatre.services.DiscountService">
+    <bean id="discountservice" class="ua.epam.theatre.services.DiscountServiceImpl">
         <property name="discounts" ref="discounts"/>
     </bean>
 

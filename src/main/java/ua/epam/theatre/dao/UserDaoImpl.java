@@ -4,7 +4,6 @@ import ua.epam.theatre.entity.Order;
 import ua.epam.theatre.entity.User;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * Created by Daria on 07.02.2016.

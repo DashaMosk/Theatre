@@ -1,6 +1,4 @@
 package ua.epam.theatre.dao;
-
-import ua.epam.theatre.entity.Auditorium;
 import ua.epam.theatre.entity.Event;
 
 import java.util.ArrayList;
@@ -14,5 +12,4 @@ public interface EventDao {
     void remove(Event event);
     ArrayList<Event> getByName(String name);
     Collection<Event> getAll();
-    void assignAuditorium(Event event, Auditorium auditorium);
 }

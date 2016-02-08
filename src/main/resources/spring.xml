@@ -53,7 +53,6 @@
 
     <bean id="bookingservice" class="ua.epam.theatre.services.BookingServiceImpl">
         <property name="bookingDao" ref="bookingdao"/>
-        <property name="priceRating" value="7.0"/>
         <property name="discountService" ref="discountservice"/>
     </bean>
     <bean id="eventservice" class="ua.epam.theatre.services.EventServiceImpl">
@@ -71,6 +70,7 @@
     <bean id="event" class="ua.epam.theatre.entity.Event" scope="prototype"/>
     <bean id="ticket" class="ua.epam.theatre.entity.Ticket" scope="prototype"/>
     <bean id="order" class="ua.epam.theatre.entity.Order" scope="prototype"/>
+    <bean id="schedule" class="ua.epam.theatre.entity.Schedule" scope="prototype"/>
     <bean id="theatredb" class="ua.epam.theatre.dao.TheatreDB"/>
 
 </beans>

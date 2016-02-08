@@ -1,6 +1,8 @@
 package ua.epam.theatre.entity;
 
-import java.sql.Timestamp;
+import ua.epam.theatre.services.Rating;
+
+import java.util.ArrayList;
 
 /**
  * Created by Daria on 06.02.2016.
@@ -8,11 +10,9 @@ import java.sql.Timestamp;
 public class Event {
     private long id;
     private String name;
-    private Timestamp startTime;
-    private Timestamp endTime;
-    private Auditorium auditorium;
     private double basePrice;
-    private double rating;
+    private ArrayList<Schedule> schedule;
+    private Rating rating;
 
     public Event() {}
 
@@ -32,30 +32,6 @@ public class Event {
         this.name = name;
     }
 
-    public Timestamp getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Timestamp startTime) {
-        this.startTime = startTime;
-    }
-
-    public Timestamp getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Timestamp endTime) {
-        this.endTime = endTime;
-    }
-
-    public Auditorium getAuditorium() {
-        return auditorium;
-    }
-
-    public void setAuditorium(Auditorium auditorium) {
-        this.auditorium = auditorium;
-    }
-
     public double getBasePrice() {
         return basePrice;
     }
@@ -64,11 +40,19 @@ public class Event {
         this.basePrice = basePrice;
     }
 
-    public double getRating() {
+    public ArrayList<Schedule> getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(ArrayList<Schedule> schedule) {
+        this.schedule = schedule;
+    }
+
+    public Rating getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(Rating rating) {
         this.rating = rating;
     }
 
@@ -76,12 +60,9 @@ public class Event {
     public String toString() {
         return "Event{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
-                ", auditorium=" + auditorium +
+                ", name='" + name +
                 ", basePrice=" + basePrice +
                 ", rating=" + rating +
-                "} /n";
+                '}';
     }
 }

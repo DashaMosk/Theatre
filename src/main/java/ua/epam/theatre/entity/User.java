@@ -1,6 +1,6 @@
 package ua.epam.theatre.entity;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  * Created by Daria on 06.02.2016.
@@ -9,7 +9,7 @@ public class User {
     private long id;
     private String email;
     private String name;
-    private Date birthDay;
+    private LocalDate birthDay;
 
     public User() {}
     public long getId() {
@@ -36,11 +36,11 @@ public class User {
         this.name = name;
     }
 
-    public Date getBirthDay() {
+    public LocalDate getBirthDay() {
         return birthDay;
     }
 
-    public void setBirthDay(Date birthDay) {
+    public void setBirthDay(LocalDate birthDay) {
         this.birthDay = birthDay;
     }
 
