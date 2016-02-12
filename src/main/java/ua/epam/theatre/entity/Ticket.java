@@ -1,11 +1,13 @@
 package ua.epam.theatre.entity;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
  * Created by Daria on 06.02.2016.
  */
 @Component
+@Scope("prototype")
 public class Ticket {
     private long id;
     private int seatNumber;

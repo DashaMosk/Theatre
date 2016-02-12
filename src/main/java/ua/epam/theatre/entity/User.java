@@ -1,5 +1,6 @@
 package ua.epam.theatre.entity;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -8,6 +9,7 @@ import java.time.LocalDate;
  * Created by Daria on 06.02.2016.
  */
 @Component
+@Scope("prototype")
 public class User {
     private long id;
     private String email;

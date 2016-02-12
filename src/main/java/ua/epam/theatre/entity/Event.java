@@ -1,5 +1,6 @@
 package ua.epam.theatre.entity;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ua.epam.theatre.services.Rating;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
  * Created by Daria on 06.02.2016.
  */
 @Component
+@Scope("prototype")
 public class Event {
     private long id;
     private String name;

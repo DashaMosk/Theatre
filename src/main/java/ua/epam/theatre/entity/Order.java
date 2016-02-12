@@ -1,5 +1,6 @@
 package ua.epam.theatre.entity;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
  * Created by Daria on 06.02.2016.
  */
 @Component
+@Scope("prototype")
 public class Order {
     private long id;
     private Timestamp orderDate;
