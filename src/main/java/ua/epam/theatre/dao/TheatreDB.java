@@ -1,5 +1,6 @@
 package ua.epam.theatre.dao;
 
+import org.springframework.stereotype.Component;
 import ua.epam.theatre.entity.*;
 
 import java.util.HashMap;
@@ -8,6 +9,7 @@ import java.util.Map;
 /**
  * Created by Daria on 07.02.2016.
  */
+@Component
 public class TheatreDB {
     public static Map<Integer, Order> orders;
     public static Map<Integer, Ticket> ticks;

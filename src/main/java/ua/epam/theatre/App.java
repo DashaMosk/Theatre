@@ -20,7 +20,7 @@ import java.util.List;
 public class App {
 
     public static void main(String[] args) throws ParseException {
-        ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+        ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring1.xml");
         System.out.println("<<< Start >>>");
         Event event1 = ctx.getBean(Event.class);
         event1.setName("King Lear");

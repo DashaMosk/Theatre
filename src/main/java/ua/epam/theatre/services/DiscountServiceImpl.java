@@ -1,5 +1,7 @@
 package ua.epam.theatre.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ua.epam.theatre.entity.Event;
 import ua.epam.theatre.entity.User;
 
@@ -9,7 +11,9 @@ import java.util.List;
 /**
  * Created by Daria on 06.02.2016.
  */
+@Service
 public class DiscountServiceImpl implements DiscontService{
+    @Autowired
     List<DiscountStrategy> discounts;
 
     public List<DiscountStrategy> getDiscounts() {

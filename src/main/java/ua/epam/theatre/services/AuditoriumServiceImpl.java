@@ -1,5 +1,7 @@
 package ua.epam.theatre.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ua.epam.theatre.entity.Auditorium;
 
 import java.util.ArrayList;
@@ -8,7 +10,9 @@ import java.util.List;
 /**
  * Created by Daria on 06.02.2016.
  */
+@Service
 public class AuditoriumServiceImpl implements AuditoriumService {
+    @Autowired
     List<Auditorium> auditoriums;
 
     public List<Auditorium> getAuditoriums() {

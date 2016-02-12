@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+     <context:component-scan base-package="ua.epam.theatre"/>
+
+     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+          <property name="locations">
+               <list>
+                    <value>classpath:bigAuditorium.properties</value>
+                    <value>classpath:midAuditorium.properties</value>
+                    <value>classpath:smallAuditorium.properties</value>
+               </list>
+          </property>
+          <property name="ignoreResourceNotFound" value="true" />
+          <property name="systemPropertiesMode">
+               <util:constant
+                       static-field="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+          </property>
+     </bean>
+
+     <bean id="bigauditorium" class="ua.epam.theatre.entity.Auditorium">
+          <constructor-arg value="${name_b}"/>
+          <constructor-arg value="${seats_b}"/>
+          <constructor-arg value="${vip_b}"/>
+     </bean>
+
+     <bean id="miduaditorium" class="ua.epam.theatre.entity.Auditorium">
+          <constructor-arg value="${name_m}"/>
+          <constructor-arg value="${seats_m}"/>
+          <constructor-arg value="${vip_m}"/>
+     </bean>
+
+     <bean id="smallauditorium" class="ua.epam.theatre.entity.Auditorium">
+          <constructor-arg value="${name_s}"/>
+          <constructor-arg value="${seats_s}"/>
+          <constructor-arg value="${vip_s}"/>
+     </bean>
+
+     <util:list id="auditoriums">
+          <ref bean="bigauditorium"/>
+          <ref bean="miduaditorium"/>
+          <ref bean="smallauditorium"/>
+     </util:list>
+
+     <util:list id="discounts">
+          <ref bean="birthdaydiscount"/>
+          <ref bean="free10thdiscount"/>
+     </util:list>
+
+</beans>

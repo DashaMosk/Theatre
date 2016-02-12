@@ -1,5 +1,7 @@
 package ua.epam.theatre.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ua.epam.theatre.dao.EventDao;
 import ua.epam.theatre.entity.Auditorium;
 import ua.epam.theatre.entity.Event;
@@ -12,7 +14,10 @@ import java.util.Collection;
 /**
  * Created by Daria on 07.02.2016.
  */
+@Service
 public class EventServiceImpl implements EventService {
+
+    @Autowired
     private EventDao eventDao;
 
     public void setEventDao(EventDao eventDao) {

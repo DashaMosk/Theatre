@@ -1,10 +1,13 @@
 package ua.epam.theatre.entity;
 
+import org.springframework.stereotype.Component;
+
 import java.sql.Timestamp;
 
 /**
  * Created by Daria_Moskalenko on 2/8/2016.
  */
+@Component
 public class Schedule {
     private long id;
     private Event event;

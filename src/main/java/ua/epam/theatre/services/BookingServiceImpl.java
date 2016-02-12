@@ -1,5 +1,7 @@
 package ua.epam.theatre.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ua.epam.theatre.dao.BookingDao;
 import ua.epam.theatre.entity.*;
 
@@ -10,9 +12,12 @@ import java.util.ArrayList;
 /**
  * Created by Daria on 06.02.2016.
  */
+@Service
 public class BookingServiceImpl implements BookingService {
 
+    @Autowired
     private BookingDao bookingDao;
+    @Autowired
     private DiscountServiceImpl discountService;
 
     public void setBookingDao(BookingDao bookingDao) {

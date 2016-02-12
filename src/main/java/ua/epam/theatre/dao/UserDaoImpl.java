@@ -1,5 +1,6 @@
 package ua.epam.theatre.dao;
 
+import org.springframework.stereotype.Repository;
 import ua.epam.theatre.entity.Order;
 import ua.epam.theatre.entity.User;
 
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by Daria on 07.02.2016.
  */
+@Repository
 public class UserDaoImpl implements UserDao {
     public void register(User user) {
         user.setId(TheatreDB.users.size()+1);

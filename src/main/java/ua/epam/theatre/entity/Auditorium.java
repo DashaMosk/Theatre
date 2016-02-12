@@ -1,5 +1,7 @@
 package ua.epam.theatre.entity;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 
 /**

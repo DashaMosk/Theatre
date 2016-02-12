@@ -1,10 +1,13 @@
 package ua.epam.theatre.entity;
 
+import org.springframework.stereotype.Component;
+
 import java.time.LocalDate;
 
 /**
  * Created by Daria on 06.02.2016.
  */
+@Component
 public class User {
     private long id;
     private String email;

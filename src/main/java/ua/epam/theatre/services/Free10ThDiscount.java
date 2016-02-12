@@ -1,5 +1,8 @@
 package ua.epam.theatre.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import ua.epam.theatre.entity.Event;
 import ua.epam.theatre.entity.Order;
 import ua.epam.theatre.entity.User;
@@ -10,8 +13,11 @@ import java.util.ArrayList;
 /**
  * Created by Daria on 07.02.2016.
  */
+@Component("free10thdiscount")
 public class Free10ThDiscount implements DiscountStrategy {
+    @Value("50.00")
     private double discPerCent;
+    @Autowired
     private UserService userService;
 
     public void setUserService(UserService userService) {

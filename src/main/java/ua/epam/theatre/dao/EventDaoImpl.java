@@ -1,5 +1,6 @@
 package ua.epam.theatre.dao;
 
+import org.springframework.stereotype.Repository;
 import ua.epam.theatre.entity.Event;
 import ua.epam.theatre.entity.Schedule;
 
@@ -9,6 +10,7 @@ import java.util.Collection;
 /**
  * Created by Daria on 07.02.2016.
  */
+@Repository
 public class EventDaoImpl implements EventDao {
     public void create(Event event) {
         event.setId(TheatreDB.eventMap.size()+1);
