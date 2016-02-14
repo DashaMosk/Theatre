@@ -29,8 +29,11 @@ public class DiscountServiceImpl implements DiscontService {
     public double getDiscount(User user, Event event, LocalDate date) {
         double pDisc = 0.0;
         for(DiscountStrategy d : discounts) {
-            pDisc += d.getDiscount(user, event, date);
+           double disc = d.getDiscount(user, event, date);
+           if(pDisc < disc) {
+               pDisc = disc;
+           }
         }
-        return (pDisc < 100.0)?pDisc:100.0;
+        return pDisc;
     }
 }

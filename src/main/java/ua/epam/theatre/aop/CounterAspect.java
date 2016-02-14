@@ -18,6 +18,7 @@ import java.util.ArrayList;
 @Aspect
 @Component
 public class CounterAspect {
+
     @Autowired
     EventStatService statService;
 

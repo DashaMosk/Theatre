@@ -23,7 +23,7 @@ public class BirthdayDiscount implements DiscountStrategy {
     }
 
     private boolean hasBirthday(User user, LocalDate date) {
-        return user.getBirthDay() == date;
+        return (user.getBirthDay().getDayOfMonth() == date.getDayOfMonth() && user.getBirthDay().getMonth() == date.getMonth());
     }
     public double getDiscount(User user, Event event, LocalDate date) {
         if(hasBirthday(user, date)) {

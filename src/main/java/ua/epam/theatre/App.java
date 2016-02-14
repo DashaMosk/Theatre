@@ -2,6 +2,7 @@ package ua.epam.theatre;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ua.epam.theatre.aop.DiscountAspect;
 import ua.epam.theatre.dao.impl.TheatreDB;
 import ua.epam.theatre.entity.*;
 import ua.epam.theatre.services.*;
@@ -15,6 +16,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Daria on 07.02.2016.
@@ -51,9 +53,9 @@ public class App {
         event3.setBasePrice(120.0);
         event3.setRating(Rating.MID);
         Schedule schedule3 = ctx.getBean(Schedule.class);
-        schedule3.setEvent(event2);
-        schedule3.setStartTime(Timestamp.valueOf("2016-03-02 19:00:00"));
-        schedule3.setEndTime(Timestamp.valueOf("2016-03-02 22:00:00"));
+        schedule3.setEvent(event3);
+        schedule3.setStartTime(Timestamp.valueOf("2016-03-03 19:00:00"));
+        schedule3.setEndTime(Timestamp.valueOf("2016-03-03 22:00:00"));
         ArrayList<Schedule> schedules3 = new ArrayList<Schedule>();
         schedules3.add(schedule3);
         event3.setSchedule(schedules3);
@@ -72,7 +74,7 @@ public class App {
         User user1 = ctx.getBean(User.class);
         user1.setName("Daria Moskalenko");
         user1.setEmail("dmoskalenko@epam.com");
-        user1.setBirthDay(LocalDate.of(1990, Month.MARCH, 7));
+        user1.setBirthDay(LocalDate.of(1990, Month.MARCH, 3));
         UserService userService = ctx.getBean(UserService.class);
         userService.register(user1);
 
@@ -153,5 +155,15 @@ public class App {
         for(EventStat eventStat : TheatreDB.eventStatMap.values()) {
             System.out.println(eventStat);
         }
+
+        System.out.println("Discount stat:");
+        DiscountAspect discountAspect = ctx.getBean(DiscountAspect.class);
+        for(DiscontStat d : discountAspect.getDiscontStats()) {
+            System.out.println(d);
+        }
+        for(Map.Entry<Class<?>, Integer> entry : discountAspect.getTotalCounter().entrySet()) {
+            System.out.println(entry.getKey()+ " count= "+entry.getValue());
+        }
+
     }
 }

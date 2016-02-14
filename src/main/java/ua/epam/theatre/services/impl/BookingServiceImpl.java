@@ -21,14 +21,6 @@ public class BookingServiceImpl implements BookingService {
     @Autowired
     private DiscountServiceImpl discountService;
 
-    public void setBookingDao(BookingDao bookingDao) {
-        this.bookingDao = bookingDao;
-    }
-
-    public void setDiscountService(DiscountServiceImpl discountService) {
-        this.discountService = discountService;
-    }
-
     private void applyDiscount(Ticket ticket, double discont) {
         double newPrice = ticket.getPrice() * discont / 100.0;
         ticket.setPrice(newPrice);
