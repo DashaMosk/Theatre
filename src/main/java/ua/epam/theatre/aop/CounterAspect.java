@@ -45,8 +45,8 @@ public class CounterAspect {
         }
     }
 
-    @Before("getTicketPriceMethod() && args(event, seat, dateTime)")
-    public void getPriceCount(Event event, int seat, Timestamp dateTime) {
+    @Before("getTicketPriceMethod() && args(event, *, *)")
+    public void getPriceCount(Event event) {
         EventStat eventStat = statService.findByEvent(event);
         if(eventStat == null) {
             eventStat = new EventStat();
@@ -56,8 +56,8 @@ public class CounterAspect {
         eventStat.incresePriceQueriedCount();
     }
 
-    @After("bookTicket() && args(user, ticket)")
-    public void bookTicketCount(User user, Ticket ticket) {
+    @After("bookTicket() && args(*, ticket)")
+    public void bookTicketCount(Ticket ticket) {
         Event event = ticket.getEvent();
         EventStat eventStat = statService.findByEvent(event);
         if(eventStat == null) {
