@@ -2,7 +2,7 @@ package ua.epam.theatre.entity;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import ua.epam.theatre.services.Rating;
+import ua.epam.theatre.services.impl.Rating;
 
 import java.util.ArrayList;
 

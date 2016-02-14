@@ -1,6 +1,7 @@
-package ua.epam.theatre.dao;
+package ua.epam.theatre.dao.impl;
 
 import org.springframework.stereotype.Repository;
+import ua.epam.theatre.dao.EventDao;
 import ua.epam.theatre.entity.Event;
 import ua.epam.theatre.entity.Schedule;
 

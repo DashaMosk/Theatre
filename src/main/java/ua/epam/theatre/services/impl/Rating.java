@@ -1,4 +1,4 @@
-package ua.epam.theatre.services;
+package ua.epam.theatre.services.impl;
 
 /**
  * Created by Daria_Moskalenko on 2/8/2016.

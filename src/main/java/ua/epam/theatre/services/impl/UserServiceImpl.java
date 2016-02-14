@@ -1,10 +1,11 @@
-package ua.epam.theatre.services;
+package ua.epam.theatre.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.epam.theatre.dao.UserDao;
 import ua.epam.theatre.entity.Order;
 import ua.epam.theatre.entity.User;
+import ua.epam.theatre.services.UserService;
 
 import java.util.ArrayList;
 

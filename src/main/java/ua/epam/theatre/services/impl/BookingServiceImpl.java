@@ -1,9 +1,10 @@
-package ua.epam.theatre.services;
+package ua.epam.theatre.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.epam.theatre.dao.BookingDao;
 import ua.epam.theatre.entity.*;
+import ua.epam.theatre.services.BookingService;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;

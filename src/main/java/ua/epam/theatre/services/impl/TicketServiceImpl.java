@@ -1,9 +1,10 @@
-package ua.epam.theatre.services;
+package ua.epam.theatre.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.epam.theatre.dao.TicketsDao;
 import ua.epam.theatre.entity.Ticket;
+import ua.epam.theatre.services.TicketService;
 
 /**
  * Created by Daria on 08.02.2016.

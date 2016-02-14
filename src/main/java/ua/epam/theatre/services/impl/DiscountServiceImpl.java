@@ -1,9 +1,11 @@
-package ua.epam.theatre.services;
+package ua.epam.theatre.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.epam.theatre.entity.Event;
 import ua.epam.theatre.entity.User;
+import ua.epam.theatre.services.DiscontService;
+import ua.epam.theatre.services.DiscountStrategy;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,7 +14,7 @@ import java.util.List;
  * Created by Daria on 06.02.2016.
  */
 @Service
-public class DiscountServiceImpl implements DiscontService{
+public class DiscountServiceImpl implements DiscontService {
     @Autowired
     List<DiscountStrategy> discounts;
 

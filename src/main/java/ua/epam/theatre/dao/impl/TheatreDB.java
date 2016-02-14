@@ -1,4 +1,4 @@
-package ua.epam.theatre.dao;
+package ua.epam.theatre.dao.impl;
 
 import org.springframework.stereotype.Component;
 import ua.epam.theatre.entity.*;
@@ -16,6 +16,7 @@ public class TheatreDB {
     public static Map<String, User> users;
     public static Map<Integer, Event> eventMap;
     public static Map<Integer,Schedule> scheduleMap;
+    public static Map<Event, EventStat> eventStatMap;
 
     public TheatreDB() {
         orders = new HashMap<Integer, Order>();
@@ -23,5 +24,6 @@ public class TheatreDB {
         users = new HashMap<String, User>();
         eventMap = new HashMap<Integer, Event>();
         scheduleMap = new HashMap<Integer, Schedule>();
+        eventStatMap = new HashMap<Event, EventStat>();
     }
 }

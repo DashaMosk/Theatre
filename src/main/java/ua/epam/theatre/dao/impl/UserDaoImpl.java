@@ -1,6 +1,7 @@
-package ua.epam.theatre.dao;
+package ua.epam.theatre.dao.impl;
 
 import org.springframework.stereotype.Repository;
+import ua.epam.theatre.dao.UserDao;
 import ua.epam.theatre.entity.Order;
 import ua.epam.theatre.entity.User;
 

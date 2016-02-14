@@ -2,8 +2,10 @@ package ua.epam.theatre;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ua.epam.theatre.dao.impl.TheatreDB;
 import ua.epam.theatre.entity.*;
 import ua.epam.theatre.services.*;
+import ua.epam.theatre.services.impl.Rating;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -20,7 +22,7 @@ import java.util.List;
 public class App {
 
     public static void main(String[] args) throws ParseException {
-        ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring1.xml");
+        ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
         System.out.println("<<< Start >>>");
         Event event1 = ctx.getBean(Event.class);
         event1.setName("King Lear");
@@ -80,11 +82,13 @@ public class App {
             System.out.println(e);
         }
 
-        System.out.println("Found event: ");
+        System.out.println("Find event: ");
         List<Event> eventToFind = eventService.getByName("Romeo and Juliet");
         for(Event e : eventToFind) {
             System.out.println(e);
         }
+
+        eventService.getByName("Romeo and Juliet"); // for stat
 
         BookingService bookingService = ctx.getBean(BookingService.class);
         TicketService ticketService = ctx.getBean(TicketService.class);
@@ -143,6 +147,11 @@ public class App {
         ArrayList<Ticket> tickets = bookingService.getTicketsForEvent(event1);
         for(Ticket t : tickets) {
             System.out.println(t);
+        }
+
+        System.out.println("Events stat:");
+        for(EventStat eventStat : TheatreDB.eventStatMap.values()) {
+            System.out.println(eventStat);
         }
     }
 }

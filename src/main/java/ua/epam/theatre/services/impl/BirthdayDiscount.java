@@ -1,9 +1,10 @@
-package ua.epam.theatre.services;
+package ua.epam.theatre.services.impl;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import ua.epam.theatre.entity.Event;
 import ua.epam.theatre.entity.User;
+import ua.epam.theatre.services.DiscountStrategy;
 
 import java.time.LocalDate;
 

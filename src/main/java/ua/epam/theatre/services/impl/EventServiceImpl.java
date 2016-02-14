@@ -1,4 +1,4 @@
-package ua.epam.theatre.services;
+package ua.epam.theatre.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,6 +6,7 @@ import ua.epam.theatre.dao.EventDao;
 import ua.epam.theatre.entity.Auditorium;
 import ua.epam.theatre.entity.Event;
 import ua.epam.theatre.entity.Schedule;
+import ua.epam.theatre.services.EventService;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
