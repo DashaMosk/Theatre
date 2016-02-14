@@ -13,10 +13,7 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Daria on 07.02.2016.
@@ -125,6 +122,11 @@ public class App {
                 System.out.println(t);
             }
         }
+        System.out.println("Messages to user");
+        Queue<String> mess = user1.getMessages();
+        for(String s : mess) {
+            System.out.println(s);
+        }
 
         System.out.println("Find user by name: ");
         ArrayList<User> users = userService.getUserByName("Daria Moskalenko");
@@ -161,6 +163,7 @@ public class App {
         for(DiscontStat d : discountAspect.getDiscontStats()) {
             System.out.println(d);
         }
+
         for(Map.Entry<Class<?>, Integer> entry : discountAspect.getTotalCounter().entrySet()) {
             System.out.println(entry.getKey()+ " count= "+entry.getValue());
         }

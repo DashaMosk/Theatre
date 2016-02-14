@@ -4,6 +4,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * Created by Daria on 06.02.2016.
@@ -15,8 +17,11 @@ public class User {
     private String email;
     private String name;
     private LocalDate birthDay;
+    private Queue<String> messages;
 
-    public User() {}
+    public User() {
+        messages = new ArrayBlockingQueue<String>(100);
+    }
     public long getId() {
         return id;
     }
@@ -47,6 +52,18 @@ public class User {
 
     public void setBirthDay(LocalDate birthDay) {
         this.birthDay = birthDay;
+    }
+
+    public Queue<String> getMessages() {
+        return messages;
+    }
+
+    public void addMessage(String message) {
+        messages.add(message);
+    }
+
+    public void clearMessagesQueue() {
+        messages.clear();
     }
 
     @Override

@@ -43,6 +43,21 @@ public class BookingServiceImpl implements BookingService {
         return price;
     }
 
+    public void bookLuckyTicket(User user, Ticket ticket) {
+        Order order = new Order();
+        ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+        Schedule sc = ticket.getSchedule();
+        ticket.setPrice(0.0);
+        tickets.add(ticket);
+        user.addMessage("You are lucky! Free ticket for you");
+        order.setOrderDate(Timestamp.valueOf(LocalDateTime.now()));
+        order.setUser(user);
+        order.setTickets(tickets);
+        System.out.println("Book ticket: ");
+        System.out.println(ticket);
+        bookingDao.saveOrder(order);
+    }
+
     public void bookTicket(User user, Ticket ticket) {
         Order order = new Order();
         ArrayList<Ticket> tickets = new ArrayList<Ticket>();
