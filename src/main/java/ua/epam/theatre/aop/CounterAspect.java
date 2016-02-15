@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class CounterAspect {
 
     @Autowired
-    EventStatService statService;
+    private EventStatService statService;
 
     @Pointcut("execution(* *.getByName(..)) && within(ua.epam.theatre.services.impl.EventServiceImpl)")
     private void getByNameMethod() {}

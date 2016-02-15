@@ -14,7 +14,7 @@ import ua.epam.theatre.services.EventStatService;
 public class EventStatServiceImpl implements EventStatService{
 
     @Autowired
-    EventStatDao eventStatDao;
+    private EventStatDao eventStatDao;
 
     public void save(EventStat eventStat) {
         eventStatDao.save(eventStat);
