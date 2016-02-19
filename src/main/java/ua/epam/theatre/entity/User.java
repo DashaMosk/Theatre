@@ -3,6 +3,7 @@ package ua.epam.theatre.entity;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -12,11 +13,16 @@ import java.util.concurrent.ArrayBlockingQueue;
  */
 @Component
 @Scope("prototype")
+@Entity
+@Table(name = "USER")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String email;
     private String name;
     private LocalDate birthDay;
+    @Transient
     private Queue<String> messages;
 
     public User() {

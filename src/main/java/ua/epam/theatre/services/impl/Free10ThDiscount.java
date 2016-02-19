@@ -11,6 +11,7 @@ import ua.epam.theatre.services.UserService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Daria on 07.02.2016.
@@ -33,7 +34,7 @@ public class Free10ThDiscount implements DiscountStrategy {
     }
 
     public double getDiscount(User user, Event event, LocalDate date) {
-        ArrayList<Order> ord = userService.getBookedTickets(user);
+        List<Order> ord = userService.getBookedTickets(user);
         int count = 0;
         for(Order o : ord) {
             count += o.getTickets().size();

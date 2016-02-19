@@ -15,6 +15,8 @@
      <context:component-scan base-package="ua.epam.theatre"/>
      <aop:aspectj-autoproxy proxy-target-class="true"/>
 
+     <bean class="ua.epam.theatre.config.Hibernateconfiguration"/>
+
      <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
           <property name="locations">
                <list>

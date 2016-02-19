@@ -116,7 +116,7 @@ public class App {
         eventService.remove(event2);
 
         System.out.println("Booked tickets for "+ user1.getName());
-        ArrayList<Order> orders = userService.getBookedTickets(user1);
+        List<Order> orders = userService.getBookedTickets(user1);
         for(Order o : orders) {
             for(Ticket t : o.getTickets()) {
                 System.out.println(t);
@@ -129,7 +129,7 @@ public class App {
         }
 
         System.out.println("Find user by name: ");
-        ArrayList<User> users = userService.getUserByName("Daria Moskalenko");
+        List<User> users = userService.getUserByName("Daria Moskalenko");
         for(User u : users) {
             System.out.println(u);
         }
