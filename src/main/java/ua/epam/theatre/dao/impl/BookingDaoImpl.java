@@ -1,12 +1,16 @@
 package ua.epam.theatre.dao.impl;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ua.epam.theatre.dao.BookingDao;
 import ua.epam.theatre.entity.Event;
-import ua.epam.theatre.entity.Order;
+import ua.epam.theatre.entity.Orders;
 import ua.epam.theatre.entity.Ticket;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Daria on 06.02.2016.
@@ -14,18 +18,22 @@ import java.util.ArrayList;
 @Repository
 public class BookingDaoImpl implements BookingDao {
 
-    public void saveOrder(Order order) {
-        order.setId(TheatreDB.orders.size()+1);
-        TheatreDB.orders.put(TheatreDB.orders.size()+1, order);
+    @Autowired
+    private SessionFactory sessionFactory;
+
+    protected Session getSession() {
+        return sessionFactory.getCurrentSession();
     }
 
-    public ArrayList<Ticket> getTicketsForEvent(Event event) {
-        ArrayList<Ticket> tickets = new ArrayList<Ticket>();
-        for(Ticket t : TheatreDB.ticks.values()){
-            if(t.getEvent().equals(event)) {
-                tickets.add(t);
-            }
-        }
+    public void saveOrder(Orders order) {
+        getSession().persist(order);
+    }
+
+    public List<Ticket> getTicketsForEvent(Event event) {
+        Query query = getSession().createQuery("from Ticket where event= :event");
+        query.setEntity("event", event);
+        List<Ticket> tickets = query.list();
         return tickets;
     }
+
 }

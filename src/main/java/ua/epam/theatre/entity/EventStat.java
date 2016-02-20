@@ -1,14 +1,20 @@
 package ua.epam.theatre.entity;
 
+import javax.persistence.*;
+
 /**
  * Created by Daria on 14.02.2016.
  */
+@Entity
+@Table(name = "EVENTSTAT")
 public class EventStat {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  int id;
     private int accessCount;
     private int priceQueriedCount;
     private int bookedCount;
-    private Event event;
+    private long eventId;
 
     public EventStat() {}
 
@@ -20,12 +26,12 @@ public class EventStat {
         this.id = id;
     }
 
-    public Event getEvent() {
-        return event;
+    public long getEventId() {
+        return eventId;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setEventId(long eventId) {
+        this.eventId = eventId;
     }
 
     public int getAccessCount() {
@@ -67,7 +73,7 @@ public class EventStat {
     @Override
     public String toString() {
         return "EventStat{" +
-                "event=" + event.getName() +
+                "eventId=" + eventId +
                 ", accessCount=" + accessCount +
                 ", priceQueriedCount=" + priceQueriedCount +
                 ", bookedCount=" + bookedCount +

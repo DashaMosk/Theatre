@@ -3,17 +3,29 @@ package ua.epam.theatre.entity;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
+
 /**
  * Created by Daria on 06.02.2016.
  */
 @Component
 @Scope("prototype")
+@Entity
+@Table(name = "TICKET")
 public class Ticket {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private int seatNumber;
     private double price;
+    @ManyToOne
+    @PrimaryKeyJoinColumn
     private Event event;
-    private Order order;
+    @ManyToOne
+    @PrimaryKeyJoinColumn
+    private Orders order;
+    @ManyToOne
+    @PrimaryKeyJoinColumn
     private Schedule schedule;
 
     public Ticket() {}
@@ -50,11 +62,11 @@ public class Ticket {
         this.event = event;
     }
 
-    public Order getOrder() {
+    public Orders getOrder() {
         return order;
     }
 
-    public void setOrder(Order order) {
+    public void setOrder(Orders order) {
         this.order = order;
     }
 
@@ -68,12 +80,16 @@ public class Ticket {
 
     @Override
     public String toString() {
+        long orderId = 0;
+        if(order != null) {
+            orderId = order.getId();
+        }
         return "Ticket{" +
                 "id=" + id +
                 ", seatNumber=" + seatNumber +
                 ", price=" + price +
                 ", event=" + event +
-                ", order=" + order +
+                ", order=" + orderId +
                 '}';
     }
 }

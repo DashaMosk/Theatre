@@ -5,17 +5,13 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import ua.epam.theatre.dao.EventDao;
 import ua.epam.theatre.entity.Event;
 import ua.epam.theatre.entity.EventStat;
 import ua.epam.theatre.entity.Ticket;
-import ua.epam.theatre.services.EventService;
 import ua.epam.theatre.services.EventStatService;
-import ua.epam.theatre.services.impl.EventServiceImpl;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 

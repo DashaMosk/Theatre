@@ -8,4 +8,5 @@ import ua.epam.theatre.entity.Ticket;
 public interface TicketService {
     void save(Ticket ticket);
     void remove(Ticket ticket);
+    void update(Ticket ticket);
 }

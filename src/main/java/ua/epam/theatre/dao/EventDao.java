@@ -1,8 +1,8 @@
 package ua.epam.theatre.dao;
+
 import ua.epam.theatre.entity.Event;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Daria on 06.02.2016.
@@ -10,6 +10,6 @@ import java.util.Collection;
 public interface EventDao {
     void create(Event event);
     void remove(Event event);
-    ArrayList<Event> getByName(String name);
-    Collection<Event> getAll();
+    List<Event> getByName(String name);
+    List<Event> getAll();
 }

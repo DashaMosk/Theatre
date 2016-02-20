@@ -1,5 +1,8 @@
 package ua.epam.theatre.dao.impl;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ua.epam.theatre.dao.TicketsDao;
 import ua.epam.theatre.entity.Ticket;
@@ -9,12 +12,23 @@ import ua.epam.theatre.entity.Ticket;
  */
 @Repository
 public class TicketsDaoImpl implements TicketsDao {
+    @Autowired
+    private SessionFactory sessionFactory;
+
+    protected Session getSession() {
+        return sessionFactory.getCurrentSession();
+    }
+
     public void save(Ticket ticket) {
-        ticket.setId(TheatreDB.ticks.size()+1);
-        TheatreDB.ticks.put(TheatreDB.ticks.size()+1, ticket);
+        getSession().persist(ticket);
     }
 
     public void remove(Ticket ticket) {
-        TheatreDB.ticks.remove(ticket.getId());
+        getSession().delete(ticket);
+    }
+
+    @Override
+    public void update(Ticket ticket) {
+        getSession().merge(ticket);
     }
 }

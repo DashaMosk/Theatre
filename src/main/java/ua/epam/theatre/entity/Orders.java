@@ -3,21 +3,30 @@ package ua.epam.theatre.entity;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Daria on 06.02.2016.
  */
 @Component
 @Scope("prototype")
-public class Order {
+@Entity
+@Table(name = "ORDERS")
+public class Orders {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private Timestamp orderDate;
-    private ArrayList<Ticket> tickets;
+    @ManyToOne
+    @PrimaryKeyJoinColumn
     private User user;
+    @Transient
+    private List<Ticket> tickets;
 
-    public Order() {}
+    public Orders() {}
 
     public long getId() {
         return id;
@@ -35,7 +44,7 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    public ArrayList<Ticket> getTickets() {
+    public List<Ticket> getTickets() {
         return tickets;
     }
 
@@ -56,7 +65,6 @@ public class Order {
         return "Order{" +
                 "id=" + id +
                 ", orderDate=" + orderDate +
-                ", tickets=" + tickets +
                 ", user=" + user +
                 '}';
     }

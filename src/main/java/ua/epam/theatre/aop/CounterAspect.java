@@ -6,10 +6,8 @@ import org.springframework.stereotype.Component;
 import ua.epam.theatre.entity.Event;
 import ua.epam.theatre.entity.EventStat;
 import ua.epam.theatre.entity.Ticket;
-import ua.epam.theatre.entity.User;
 import ua.epam.theatre.services.EventStatService;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -38,7 +36,7 @@ public class CounterAspect {
             EventStat eventStat = statService.findByEvent(e);
             if(eventStat == null) {
                 eventStat = new EventStat();
-                eventStat.setEvent(e);
+                eventStat.setEventId(e.getId());
                 statService.save(eventStat);
             }
             eventStat.increseAccessCount();
@@ -50,7 +48,7 @@ public class CounterAspect {
         EventStat eventStat = statService.findByEvent(event);
         if(eventStat == null) {
             eventStat = new EventStat();
-            eventStat.setEvent(event);
+            eventStat.setEventId(event.getId());
             statService.save(eventStat);
         }
         eventStat.incresePriceQueriedCount();
@@ -62,7 +60,7 @@ public class CounterAspect {
         EventStat eventStat = statService.findByEvent(event);
         if(eventStat == null) {
             eventStat = new EventStat();
-            eventStat.setEvent(event);
+            eventStat.setEventId(event.getId());
             statService.save(eventStat);
         }
         eventStat.increseBookedCount();

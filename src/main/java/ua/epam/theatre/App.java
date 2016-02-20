@@ -3,9 +3,9 @@ package ua.epam.theatre;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ua.epam.theatre.aop.DiscountAspect;
-import ua.epam.theatre.dao.impl.TheatreDB;
 import ua.epam.theatre.entity.*;
 import ua.epam.theatre.services.*;
+import ua.epam.theatre.services.impl.EventStatServiceImpl;
 import ua.epam.theatre.services.impl.Rating;
 
 import java.sql.Timestamp;
@@ -68,27 +68,6 @@ public class App {
         eventService.assignAuditorium(event2, auditoriums.get(1), LocalDateTime.of(2016, Month.MARCH, 1, 19, 0));
         eventService.assignAuditorium(event3, auditoriums.get(2), LocalDateTime.of(2016, Month.MARCH, 1, 19, 0));
 
-        User user1 = ctx.getBean(User.class);
-        user1.setName("Daria Moskalenko");
-        user1.setEmail("dmoskalenko@epam.com");
-        user1.setBirthDay(LocalDate.of(1990, Month.MARCH, 3));
-        UserService userService = ctx.getBean(UserService.class);
-        userService.register(user1);
-
-        Collection<Event> events = eventService.getAll();
-        System.out.println("Get all events: ");
-        for(Event e : events) {
-            System.out.println(e);
-        }
-
-        System.out.println("Find event: ");
-        List<Event> eventToFind = eventService.getByName("Romeo and Juliet");
-        for(Event e : eventToFind) {
-            System.out.println(e);
-        }
-
-        eventService.getByName("Romeo and Juliet"); // for stat
-
         BookingService bookingService = ctx.getBean(BookingService.class);
         TicketService ticketService = ctx.getBean(TicketService.class);
         Ticket ticket1 = ctx.getBean(Ticket.class);
@@ -110,55 +89,99 @@ public class App {
         ticket3.setSchedule(schedule3);
         ticketService.save(ticket3);
 
+        List<Ticket> tickets1 = new ArrayList<>();
+        tickets1.add(ticket1);
+        schedule1.setTicket(tickets1);
+
+        List<Ticket> tickets2 = new ArrayList<>();
+        tickets2.add(ticket2);
+        schedule2.setTicket(tickets2);
+
+        List<Ticket> tickets3 = new ArrayList<>();
+        tickets3.add(ticket3);
+        schedule3.setTicket(tickets3);
+
+
+        User user1 = ctx.getBean(User.class);
+        user1.setName("Daria Moskalenko");
+        user1.setEmail("dmoskalenko@epam.com");
+        user1.setBirthDay(LocalDate.of(1990, Month.MARCH, 3));
+
+        User user2 = ctx.getBean(User.class);
+        user2.setName("Ivan Ivanov");
+        user2.setEmail("iIvanov@epam.com");
+        user2.setBirthDay(LocalDate.of(1980, Month.MARCH, 7));
+
+        UserService userService = ctx.getBean(UserService.class);
+        userService.register(user1);
+        userService.register(user2);
+
+        Collection<Event> events = eventService.getAll();
+        System.out.println("> Get all events: ");
+        for(Event e : events) {
+            System.out.println(e);
+        }
+
+        System.out.println("> Find event: ");
+        List<Event> eventToFind = eventService.getByName("Romeo and Juliet");
+        for(Event e : eventToFind) {
+            System.out.println(e);
+        }
+
+        eventService.getByName("Romeo and Juliet"); // for stat
+
         bookingService.bookTicket(user1, ticket3);
         bookingService.bookTicket(user1, ticket2);
 
         eventService.remove(event2);
 
-        System.out.println("Booked tickets for "+ user1.getName());
-        List<Order> orders = userService.getBookedTickets(user1);
-        for(Order o : orders) {
-            for(Ticket t : o.getTickets()) {
+        System.out.println("> Booked tickets for "+ user1.getName());
+        List<Ticket> tickets = userService.getBookedTickets(user1);
+        for(Ticket t : tickets) {
                 System.out.println(t);
-            }
         }
-        System.out.println("Messages to user");
+        System.out.println("> Messages to user");
         Queue<String> mess = user1.getMessages();
         for(String s : mess) {
             System.out.println(s);
         }
 
-        System.out.println("Find user by name: ");
+        System.out.println("> Find user by name: ");
         List<User> users = userService.getUserByName("Daria Moskalenko");
         for(User u : users) {
             System.out.println(u);
         }
 
-        System.out.println("Find user by email: ");
+        System.out.println("> Find user by email: ");
         System.out.println(userService.getUserByEmail("dmoskalenko@epam.com"));
 
-        System.out.println("VIP seats :");
+        System.out.println("> Try to remove user:");
+        userService.remove(user1);
+        userService.remove(user2);
+
+        System.out.println("> Find user by email: ");
+        System.out.println(userService.getUserByEmail("iIvanov@epam.com"));
+
+        System.out.println("> VIP seats :");
         System.out.println(auditoriumService.getVipSeats());
 
-        System.out.println("Seats number");
+        System.out.println("> Seats number");
         System.out.println(auditoriumService.getSeatsNumber());
 
-        userService.remove(user1);
-        System.out.println("Find user by email: ");
-        System.out.println(userService.getUserByEmail("dmoskalenko@epam.com"));
-
-        System.out.println("Tickets for "+event1.getName());
-        ArrayList<Ticket> tickets = bookingService.getTicketsForEvent(event1);
+        System.out.println("> Tickets for "+event1.getName());
+        tickets = bookingService.getTicketsForEvent(event1);
         for(Ticket t : tickets) {
             System.out.println(t);
         }
 
-        System.out.println("Events stat:");
-        for(EventStat eventStat : TheatreDB.eventStatMap.values()) {
+        System.out.println("> Events stat:");
+        EventStatService eventStatService = ctx.getBean(EventStatServiceImpl.class);
+        List<EventStat> stats = eventStatService.getAll();
+        for(EventStat eventStat : stats) {
             System.out.println(eventStat);
         }
 
-        System.out.println("Discount stat:");
+        System.out.println("> Discount stat:");
         DiscountAspect discountAspect = ctx.getBean(DiscountAspect.class);
         for(DiscontStat d : discountAspect.getDiscontStats()) {
             System.out.println(d);

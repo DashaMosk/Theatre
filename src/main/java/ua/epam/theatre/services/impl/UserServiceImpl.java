@@ -4,11 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.epam.theatre.dao.UserDao;
-import ua.epam.theatre.entity.Order;
+import ua.epam.theatre.entity.Ticket;
 import ua.epam.theatre.entity.User;
 import ua.epam.theatre.services.UserService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,12 +26,17 @@ public class UserServiceImpl implements UserService {
 
     public void register(User user) {
         userDao.register(user);
-        System.out.println("New user: "+ user);
+        System.out.println("> New user: "+ user);
     }
 
     public void remove(User user) {
-        userDao.remove(user);
-        System.out.println("Remove user "+user.getName());
+        List<Ticket> orders = userDao.getBookedTickets(user);
+        if(orders.size() > 0) {
+            System.out.println("> Can't remove user "+user.getName()+ ", the user has orders");
+        } else {
+            userDao.remove(user);
+            System.out.println("> Remove user " + user.getName());
+        }
     }
 
     public User getUserByEmail(String email) {
@@ -43,7 +47,7 @@ public class UserServiceImpl implements UserService {
         return userDao.getUserByName(name);
     }
 
-    public List<Order> getBookedTickets(User user) {
+    public List<Ticket> getBookedTickets(User user) {
         return userDao.getBookedTickets(user);
     }
 }

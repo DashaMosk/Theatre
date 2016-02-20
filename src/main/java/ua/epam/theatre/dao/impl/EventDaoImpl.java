@@ -1,47 +1,46 @@
 package ua.epam.theatre.dao.impl;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ua.epam.theatre.dao.EventDao;
 import ua.epam.theatre.entity.Event;
-import ua.epam.theatre.entity.Schedule;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Daria on 07.02.2016.
  */
 @Repository
 public class EventDaoImpl implements EventDao {
-    public void create(Event event) {
-        event.setId(TheatreDB.eventMap.size()+1);
-        for (Schedule s : event.getSchedule()) {
-            s.setId(TheatreDB.scheduleMap.size()+1);
-            TheatreDB.scheduleMap.put(TheatreDB.scheduleMap.size()+1, s);
-        }
 
-        TheatreDB.eventMap.put(TheatreDB.eventMap.size()+1, event);
+    @Autowired
+    private SessionFactory sessionFactory;
+
+    protected Session getSession() {
+        return sessionFactory.getCurrentSession();
+    }
+
+    public void create(Event event) {
+        getSession().persist(event);
     }
 
     public void remove(Event event) {
-        TheatreDB.eventMap.remove(event.getId());
-        for (Schedule s : event.getSchedule()) {
-            TheatreDB.scheduleMap.remove(s.getId());
-        }
+        getSession().delete(event);
     }
 
-    public ArrayList<Event> getByName(String name) {
-        ArrayList<Event> events = new ArrayList<Event>();
-        for(Event e : TheatreDB.eventMap.values()) {
-            if(e.getName().equals(name)) {
-                events.add(e);
-            }
-        }
+    public List<Event> getByName(String name) {
+        Query query = getSession().createQuery("from Event where name= :name");
+        query.setString("name", name);
+        List<Event> events = query.list();
         return events;
     }
 
-    public Collection<Event> getAll() {
-        return  TheatreDB.eventMap.values();
+    public List<Event> getAll() {
+        Query query = getSession().createQuery("from Event");
+        List<Event> events = query.list();
+        return events;
     }
-
 }

@@ -1,9 +1,8 @@
 package ua.epam.theatre.dao;
 
-import ua.epam.theatre.entity.Order;
+import ua.epam.theatre.entity.Ticket;
 import ua.epam.theatre.entity.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,5 +13,5 @@ public interface UserDao {
     void remove(User user);
     User getUserByEmail(String email);
     List<User> getUserByName(String name);
-    List<Order> getBookedTickets(User user);
+    List<Ticket> getBookedTickets(User user);
 }

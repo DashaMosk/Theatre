@@ -1,22 +1,32 @@
 package ua.epam.theatre.entity;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import ua.epam.theatre.services.impl.Rating;
 
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Daria on 06.02.2016.
  */
 @Component
 @Scope("prototype")
+@Entity
+@Table(name = "EVENT")
 public class Event {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     private double basePrice;
-    private ArrayList<Schedule> schedule;
     private Rating rating;
+    @OneToMany(mappedBy = "event")
+    @Cascade(CascadeType.ALL)
+    private List<Schedule> schedule;
 
     public Event() {}
 
@@ -44,7 +54,7 @@ public class Event {
         this.basePrice = basePrice;
     }
 
-    public ArrayList<Schedule> getSchedule() {
+    public List<Schedule> getSchedule() {
         return schedule;
     }
 
@@ -58,6 +68,10 @@ public class Event {
 
     public void setRating(Rating rating) {
         this.rating = rating;
+    }
+
+    public void setSchedule(List<Schedule> schedule) {
+        this.schedule = schedule;
     }
 
     @Override
